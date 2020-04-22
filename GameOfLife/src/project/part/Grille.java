@@ -32,8 +32,12 @@ public class Grille {
 		return this.column;
 	}
 	
-	public Color getCell(int a, int b) {
-		return this.grille[a][b].getCell();
+	public Color getCurrentCell(int a, int b) {
+		return this.grille[a][b].getCurrentCell();
+	}
+	
+	public Color getUpdatingCell(int a,int b) {
+		return this.grille[a][b].getUpdatingCell();
 	}
 	
 	public void setLine(int a) {
@@ -44,7 +48,15 @@ public class Grille {
 		this.line = b;
 	}
 	
-	public void setCell(Color c, int a, int b) {
-		this.grille[a][b].setCell(c);
+	public void setUpdatingCell(Color c, int a, int b) {
+		this.grille[a][b].setUpdatingCell(c);
+	}
+	
+	public void setCurrentCell(Color c, int a, int b) {
+		this.grille[a][b].setCurrentCell(c);
+	}
+	
+	public int getValue(int a, int b) {
+		return this.grille[a][b].getCurrentValue();
 	}
 }

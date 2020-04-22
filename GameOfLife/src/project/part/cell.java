@@ -6,35 +6,60 @@ public class cell {
 	
 	//Attributes
 	
-	private Color c;
-	
+	private Color updating;
+	private Color current ; // two color, updating for the updating tour and current for the current tour
 	//Methods
 	
 	//Constructor
 	public cell() {
-		this.c = Color.white;
+		this.current = Color.white;
+		this.updating = Color.black;
 	}
 	
 	
 	
 	// Getter & Setter
 	
-	public Color getCell() {
-		return this.c;
+	public Color getCurrentCell() {
+		return this.current;
 	}
 	
-	public void setCell(Color c) {
+	public Color getUpdatingCell() {
+		return this.updating;
+	}
+	
+	public void setCurrentCell(Color c) {
 		if(c.equals(Color.white))
 		{
-			this.c = Color.white;
+			this.current = Color.white;
 		}
 		else
 		{
-			this.c = Color.black;
+			this.current = Color.black;
+		}
+	}
+	
+	public void setUpdatingCell(Color c) {
+		if(c.equals(Color.white))
+		{
+			this.updating = Color.white;
+		}
+		else
+		{
+			this.updating = Color.black;
 		}
 	}
 	
 	
-	
+	public int getCurrentValue() {
+		if(this.current.equals(Color.white))
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
+		}
+	}
 	
 }
