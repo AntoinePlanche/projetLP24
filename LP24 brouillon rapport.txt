@@ -1,0 +1,19 @@
+rappport LP24
+
+difficulté:
+
+quand on parcour le tableau de cellule, on auto-influe sur le changement ,
+les dernieres cellules changeaient vont influé sur celle entrain d'être changer
+
+les bord du tableau qui ne se changent pas comme les cellules du milieu
+
+encore différent pour les cases corners
+
+Optimisation
+
+creer variable pour stocker life.getLine()-1 et life.getColumn()-1
+
+
+Idea
+
+start configuration peu étre le constructeur de games
