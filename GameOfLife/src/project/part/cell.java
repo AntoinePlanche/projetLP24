@@ -13,7 +13,7 @@ public class cell {
 	//Constructor
 	public cell() {
 		this.current = Color.white;
-		this.updating = Color.black;
+		this.updating = Color.white;
 	}
 	
 	
@@ -59,6 +59,17 @@ public class cell {
 		else
 		{
 			return 1;
+		}
+	}
+	
+	public String printCell() {
+		if (this.getCurrentCell().equals(Color.black))
+		{
+			return "black";
+		}
+		else 
+		{
+			return "white";
 		}
 	}
 	

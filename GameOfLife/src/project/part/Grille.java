@@ -8,7 +8,7 @@ public class Grille {
 	//Attributes
 	private int line;
 	private int column;
-	private cell grille[][] = new cell[line][column];
+	private cell grille[][];
 	
 	//Methods
 	
@@ -16,6 +16,14 @@ public class Grille {
 	public Grille() {
 		this.line = 1000;
 		this.column = 1000;
+		grille = new cell[line][column];
+ 		for (int i = 0;i<this.line; i++)
+		{
+			for(int j = 0; j<this.column; j++)
+			{
+				grille[i][j] = new cell();
+			}
+		}
 	}
 	
 	public Grille(int a, int b) {
@@ -58,5 +66,15 @@ public class Grille {
 	
 	public int getValue(int a, int b) {
 		return this.grille[a][b].getCurrentValue();
+	}
+	
+	public void printGrille() {
+		for(int i = 0; i<this.line; i++)
+		{
+			for (int j = 0; j<this.column; j++)
+			{
+				System.out.println("the cell["+(i+1)+"]["+(j+1)+"] is "+this.grille[i][j].printCell());
+			}
+		}
 	}
 }

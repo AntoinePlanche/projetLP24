@@ -7,11 +7,11 @@ public class games {
 
 	private Grille life = new Grille();
 	
-	public void startConfiguration() {
-		for(int i = 498;i<503;i++)
+	public games() {
+		for(int j = 499;j<502;j++)
 		{
-			life.setCurrentCell(Color.black,500,i);
-			life.setUpdatingCell(Color.black,500,i);
+			life.setCurrentCell(Color.black,500,j);
+			life.setUpdatingCell(Color.black,500,j);
 		}
 	}
 	
@@ -19,10 +19,12 @@ public class games {
 	{
 		int lap = 0;
 		int NbrNeighbour = 0;
+		life.printGrille();
+		System.out.println("We are on lap "+lap+".");
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Type on \" Enter \" to go to the next lap");
+		System.out.println("Type on \"n\" to go to the next lap");
 		char next = sc.nextLine().charAt(0);
-		while(next == 13) {
+		while(next == 'n') {
 			for (int i = 1; i<(life.getLine()-1); i++)
 			{
 				for (int j = 1; (j<life.getColumn()-1); j++)
@@ -220,8 +222,11 @@ public class games {
 					life.setCurrentCell(life.getUpdatingCell(i,j),i,j);
 				}
 			}
+			life.printGrille();
 			lap++;
-			System.out.println(lap);
+			System.out.println("We are on lap "+lap+".");
+			System.out.println("Type on \"n\" to go to the next lap");
+			next = sc.nextLine().charAt(0);
 		}
 		sc.close();
 	}
