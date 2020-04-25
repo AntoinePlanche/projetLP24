@@ -29,6 +29,14 @@ public class Grille {
 	public Grille(int a, int b) {
 		this.line = b;
 		this.column = a;
+		grille = new cell[line][column];
+ 		for (int i = 0;i<this.line; i++)
+		{
+			for(int j = 0; j<this.column; j++)
+			{
+				grille[i][j] = new cell();
+			}
+		}
 	}
 	
 	//getters & setters

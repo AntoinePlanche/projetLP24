@@ -5,7 +5,7 @@ import java.util.*;
 
 public class games {
 
-	private Grille life = new Grille();
+	private Grille life;
 	private static Scanner sc = new Scanner(System.in);
 	
 	public games() {
@@ -13,6 +13,11 @@ public class games {
 		int line = 0;
 		int column = 0;
 		System.out.println("Choose the start configuration.");
+		System.out.println("How many line do you want ?");
+		line = sc.nextInt();
+		System.out.println("How many column do you want ?");
+		column = sc.nextInt();
+		life = new Grille(line ,column);
 		do {
 			System.out.println("Type the line of the new black cell");
 			line = sc.nextInt();
