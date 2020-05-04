@@ -56,6 +56,10 @@ public class Grille {
 		return this.grille[a][b].getUpdatingCell();
 	}
 	
+	public Color getGoalCell(int a,int b) {
+		return this.grille[a][b].getGoalCell();
+	}
+	
 	public void setLine(int a) {
 		this.line = a;
 	}
@@ -72,8 +76,27 @@ public class Grille {
 		this.grille[a][b].setCurrentCell(c);
 	}
 	
+	public void setGoalCell(Color c,int a,int b) {
+		this.grille[a][b].setGoalCell(c);
+	}
+	
 	public int getValue(int a, int b) {
 		return this.grille[a][b].getCurrentValue();
+	}
+	
+	public int numberOfBlackCellGoal() {
+		int counter = 0;
+		for(int i = 0; i<this.line; i++)
+		{
+			for (int j = 0; j<this.column; j++)
+			{
+				if(grille[i][j].getGoalCell().equals(Color.black))
+				{
+					counter++;
+				}
+			}
+		}
+		return counter;
 	}
 	
 	public void printGrille() {

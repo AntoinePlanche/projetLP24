@@ -7,13 +7,17 @@ public class cell {
 	//Attributes
 	
 	private Color updating;
-	private Color current ; // two color, updating for the updating tour and current for the current tour
+	private Color current ; 
+	private Color goal;
+	// three color, updating for the updating tour, current for the current tour and purpose to compare with the purpose configuration
+	
 	//Methods
 	
 	//Constructor
 	public cell() {
 		this.current = Color.white;
 		this.updating = Color.white;
+		this.goal = Color.white;
 	}
 	
 	
@@ -26,6 +30,21 @@ public class cell {
 	
 	public Color getUpdatingCell() {
 		return this.updating;
+	}
+	
+	public Color getGoalCell() {
+		return this.goal;
+	}
+	
+	public void setGoalCell(Color c) {
+		if(c.equals(Color.white))
+		{
+			this.goal = Color.white;
+		}
+		else
+		{
+			this.goal = Color.black;
+		}
 	}
 	
 	public void setCurrentCell(Color c) {
@@ -52,7 +71,7 @@ public class cell {
 	
 	
 	public int getCurrentValue() {
-		if(this.current.equals(Color.white))
+		if(this.current.equals(Color.white)) //we assign a value to each color to facilitate the algorithm
 		{
 			return 0;
 		}

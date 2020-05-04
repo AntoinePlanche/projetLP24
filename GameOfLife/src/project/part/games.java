@@ -6,7 +6,8 @@ import java.util.*;
 public class games {
 
 	private Grille life;
-	private static Scanner sc = new Scanner(System.in);
+	private Scanner sc = new Scanner(System.in);
+	private int goalLap;
 	
 	public games() {
 		
@@ -21,38 +22,38 @@ public class games {
 		do {
 			System.out.println("Type the line of the new black cell");
 			line = sc.nextInt();
-			while(line<0 || line>= life.getLine())
+			while(line <= 0 || line > life.getLine())
 			{
 				System.out.println("This line is not included in this grille.\nRetry.");
 				line = sc.nextInt();
 			}
 			System.out.println("Type the column of the new black cell");
 			column = sc.nextInt();
-			while(column<0 || column>= life.getLine())
+			while(column <= 0 || column > life.getLine())
 			{
 				System.out.println("This column is not included in this grille.\nRetry.");
 				column = sc.nextInt();
 			}
-			while(life.getCurrentCell(line, column).equals(Color.black))
+			while(life.getCurrentCell(line-1, column-1).equals(Color.black))
 			{
 				System.out.println("cell already black, retry please");
 				System.out.println("Type the line of the new black cell");
 				line = sc.nextInt();
-				while(line<0 || line>= life.getLine())
+				while(line <= 0 || line > life.getLine())
 				{
 					System.out.println("This line is not included in this grille.\nRetry.");
 					line = sc.nextInt();
 				}
 				System.out.println("Type the column of the new black cell");
 				column = sc.nextInt();
-				while(column<0 || column>= life.getLine())
+				while(column <= 0 || column > life.getLine())
 				{
 					System.out.println("This column is not included in this grille.\nRetry.");
 					column = sc.nextInt();
 				}
 			}
-			life.setCurrentCell(Color.black, line, column);
-			life.setUpdatingCell(Color.black, line, column);
+			life.setCurrentCell(Color.black, line-1, column-1);
+			life.setUpdatingCell(Color.black, line-1, column-1);
 			System.out.println("Type 1 to add a new black cell on the start configuration or 0 to quit.");
 			line = sc.nextInt();
 			while(line != 1 && line != 0)
@@ -61,6 +62,51 @@ public class games {
 				line = sc.nextInt();
 			}
 		}while(line == 1);
+		System.out.println("Choose the configuration goal");
+		do {
+			System.out.println("Type the line of the new black cell goal");
+			line = sc.nextInt();
+			while(line <=0 || line > life.getLine())
+			{
+				System.out.println("This line is not included in this grille.\nRetry.");
+				line = sc.nextInt();
+			}
+			System.out.println("Type the column of the new black cell goal");
+			column = sc.nextInt();
+			while(column <=0 || column > life.getLine())
+			{
+				System.out.println("This column is not included in this grille.\nRetry.");
+				column = sc.nextInt();
+			}
+			while(life.getGoalCell(line-1, column-1).equals(Color.black))
+			{
+				System.out.println("cell already black, retry please");
+				System.out.println("Type the line of the new black cell goal");
+				line = sc.nextInt();
+				while(line <=0 || line > life.getLine())
+				{
+					System.out.println("This line is not included in this grille.\nRetry.");
+					line = sc.nextInt();
+				}
+				System.out.println("Type the column of the new black cell goal");
+				column = sc.nextInt();
+				while(column <= 0 || column > life.getLine())
+				{
+					System.out.println("This column is not included in this grille.\nRetry.");
+					column = sc.nextInt();
+				}
+			}
+			life.setGoalCell(Color.black, line-1, column-1);
+			System.out.println("Type 1 to add a new black cell on the start configuration or 0 to quit.");
+			line = sc.nextInt();
+			while(line != 1 && line != 0)
+			{
+				System.out.println("Retry.\nType 1 to add a new black cell goal on the configuration or 0 to quit.");
+				line = sc.nextInt();
+			}
+		}while(line == 1);
+		System.out.println("How many lap to reach this goal do you want ?");
+		goalLap = sc.nextInt();
 	}
 	
 	public void lapAfterLap()
@@ -277,6 +323,29 @@ public class games {
 			}
 			life.printGrille();
 			lap++;
+			if(lap > goalLap) {
+				System.out.println("Oh no, you lost");
+				System.exit(0);
+			}
+			else
+			{
+				int counter = 0;
+				for(int i = 0; i<life.getLine();i++)
+				{
+					for(int j = 0; j<life.getColumn();j++)
+					{
+						if(life.getCurrentCell(i, j).equals(life.getGoalCell(i, j)))
+						{
+							counter++;
+						}
+					}
+				}
+				if( counter == (life.getLine()*life.getColumn()) )
+				{
+					System.out.println("Congratulation, you won in "+lap+" lap !!");
+					System.exit(0);
+				}
+			}
 			System.out.println("We are on lap "+lap+".");
 			System.out.println("Type on 1 to go to the next lap, 0 to quit the simulation");
 			next = (char)sc.nextInt();
