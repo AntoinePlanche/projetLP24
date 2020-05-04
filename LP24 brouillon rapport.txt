@@ -1,21 +1,22 @@
 rappport LP24
 
-
 difficulté:
 
-_quand on parcourt le tableau de cellule, on auto-influe sur le changement en cours,
-les dernieres cellules changées vont influer sur celles entrain d'être changer.
+quand on parcour le tableau de cellule, on auto-influe sur le changement ,
+les dernieres cellules changeaient vont influé sur celle entrain d'être changer
 
-_les bords du tableau qui ne se changent pas comme les cellules du milieu.
+les bord du tableau qui ne se changent pas comme les cellules du milieu
 
-_encore différent pour les cellules corners
-
+encore différent pour les cases corners
 
 Optimisation
 
-créer variable pour stocker life.getLine()-1 et life.getColumn()-1.
+preferer mémoire à calcul
+creer variable pour stocker life.getLine()-1 et life.getColumn()-1
 
+rendre le tableau le plus transparent possible pour le joueur non initié au mode de pensé "informatique"
+pas d'indice 0 dans les tableaux
 
-Idées
+Idea
 
-start configuration peut être le constructeur de games.
+start configuration peu étre le constructeur de games
