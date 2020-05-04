@@ -1,5 +1,7 @@
+/bin
+
 # Compiled class file
-/bin/project/part/*.class
+*.class
 
 # Log file
 *.log
