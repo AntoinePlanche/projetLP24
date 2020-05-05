@@ -8,7 +8,7 @@ public class Grille {
 	//Attributes
 	private int line;
 	private int column;
-	private cell grille[][];
+	private Cell grille[][];
 	
 	//Methods
 	
@@ -16,25 +16,25 @@ public class Grille {
 	public Grille() {
 		this.line = 1000;
 		this.column = 1000;
-		grille = new cell[line][column];
+		grille = new Cell[line][column];
  		for (int i = 0;i<this.line; i++)
 		{
 			for(int j = 0; j<this.column; j++)
 			{
-				grille[i][j] = new cell();
+				grille[i][j] = new Cell();
 			}
 		}
 	}
 	
 	public Grille(int a, int b) {
-		this.line = b;
-		this.column = a;
-		grille = new cell[line][column];
+		this.line = a;
+		this.column = b;
+		grille = new Cell[line][column];
  		for (int i = 0;i<this.line; i++)
 		{
 			for(int j = 0; j<this.column; j++)
 			{
-				grille[i][j] = new cell();
+				grille[i][j] = new Cell();
 			}
 		}
 	}
@@ -99,13 +99,29 @@ public class Grille {
 		return counter;
 	}
 	
-	public void printGrille() {
-		for(int i = 0; i<this.line; i++)
+	public void printGrille(String language) {
+		if (language.equals("en"))
 		{
-			for (int j = 0; j<this.column; j++)
+			for(int i = 0; i<this.line; i++)
 			{
-				System.out.println("the cell["+(i+1)+"]["+(j+1)+"] is "+this.grille[i][j].printCell());
+				for (int j = 0; j<this.column; j++)
+				{
+					System.out.println("the cell["+(i+1)+"]["+(j+1)+"] is "+this.grille[i][j].printCell(language));
+				}
 			}
 		}
+		else
+		{
+			for(int i = 0; i<this.line; i++)
+			{
+				for (int j = 0; j<this.column; j++)
+				{
+					System.out.println("la cellule["+(i+1)+"]["+(j+1)+"] est "+this.grille[i][j].printCell(language));
+				}
+			}
+		}
+		
 	}
+	
+	
 }
