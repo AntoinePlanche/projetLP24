@@ -24,7 +24,7 @@ public class Games {
 			language = sc.nextLine();
 		}
 		RESOURCEBUNDLE = ResourceBundle.getBundle(BUNDLENAME,new Locale(language));
-		System.out.println(RESOURCEBUNDLE.getString("keyone"));
+		System.out.println(RESOURCEBUNDLE.getString("keyeleven"));
 		System.out.println(RESOURCEBUNDLE.getString("keytwo"));
 		line = sc.nextInt();
 		while (line <= 0)
@@ -42,50 +42,6 @@ public class Games {
 			column = sc.nextInt();
 		}
 		life = new Grille(line ,column);
-		do {
-			System.out.println(RESOURCEBUNDLE.getString("keyfour"));
-			line = sc.nextInt();
-			while(line <= 0 || line > life.getLine())
-			{
-				System.out.println(RESOURCEBUNDLE.getString("keyfive"));
-				line = sc.nextInt();
-			}
-			System.out.println(RESOURCEBUNDLE.getString("keysix"));
-			column = sc.nextInt();
-			while(column <= 0 || column > life.getColumn())
-			{
-				System.out.println(RESOURCEBUNDLE.getString("keyseven"));
-				column = sc.nextInt();
-			}
-			while(life.getCurrentCell(line-1, column-1).equals(Color.black))
-			{
-				System.out.println(RESOURCEBUNDLE.getString("keyeight"));
-				System.out.println(RESOURCEBUNDLE.getString("keyfour"));
-				line = sc.nextInt();
-				while(line <= 0 || line > life.getLine())
-				{
-					System.out.println(RESOURCEBUNDLE.getString("keyfive"));
-					line = sc.nextInt();
-				}
-				System.out.println(RESOURCEBUNDLE.getString("keysix"));
-				column = sc.nextInt();
-				while(column <= 0 || column > life.getColumn())
-				{
-					System.out.println(RESOURCEBUNDLE.getString("keyseven"));
-					column = sc.nextInt();
-				}
-			}
-			life.setCurrentCell(Color.black, line-1, column-1);
-			life.setUpdatingCell(Color.black, line-1, column-1);
-			System.out.println(RESOURCEBUNDLE.getString("keynine"));
-			line = sc.nextInt();
-			while(line != 1 && line != 0)
-			{
-				System.out.println(RESOURCEBUNDLE.getString("keyten"));
-				line = sc.nextInt();
-			}
-		}while(line == 1);
-		System.out.println(RESOURCEBUNDLE.getString("keyeleven"));
 		do {
 			System.out.println(RESOURCEBUNDLE.getString("keytwelve"));
 			line = sc.nextInt();
@@ -136,6 +92,51 @@ public class Games {
 			System.out.println(RESOURCEBUNDLE.getString("keysixteen"));
 			goalLap = sc.nextInt();
 		}
+		System.out.println(RESOURCEBUNDLE.getString("keyone"));
+		do {
+			System.out.println(RESOURCEBUNDLE.getString("keyfour"));
+			line = sc.nextInt();
+			while(line <= 0 || line > life.getLine())
+			{
+				System.out.println(RESOURCEBUNDLE.getString("keyfive"));
+				line = sc.nextInt();
+			}
+			System.out.println(RESOURCEBUNDLE.getString("keysix"));
+			column = sc.nextInt();
+			while(column <= 0 || column > life.getColumn())
+			{
+				System.out.println(RESOURCEBUNDLE.getString("keyseven"));
+				column = sc.nextInt();
+			}
+			while(life.getCurrentCell(line-1, column-1).equals(Color.black))
+			{
+				System.out.println(RESOURCEBUNDLE.getString("keyeight"));
+				System.out.println(RESOURCEBUNDLE.getString("keyfour"));
+				line = sc.nextInt();
+				while(line <= 0 || line > life.getLine())
+				{
+					System.out.println(RESOURCEBUNDLE.getString("keyfive"));
+					line = sc.nextInt();
+				}
+				System.out.println(RESOURCEBUNDLE.getString("keysix"));
+				column = sc.nextInt();
+				while(column <= 0 || column > life.getColumn())
+				{
+					System.out.println(RESOURCEBUNDLE.getString("keyseven"));
+					column = sc.nextInt();
+				}
+			}
+			life.setCurrentCell(Color.black, line-1, column-1);
+			life.setUpdatingCell(Color.black, line-1, column-1);
+			System.out.println(RESOURCEBUNDLE.getString("keynine"));
+			line = sc.nextInt();
+			while(line != 1 && line != 0)
+			{
+				System.out.println(RESOURCEBUNDLE.getString("keyten"));
+				line = sc.nextInt();
+			}
+		}while(line == 1);
+		
 	}
 	
 	public void lapAfterLap()
