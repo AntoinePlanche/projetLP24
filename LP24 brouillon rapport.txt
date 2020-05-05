@@ -11,11 +11,17 @@ encore différent pour les cases corners
 
 Optimisation
 
+J'ai fait en sorte qu'on se puisse pas gagner des le premier tour
+
 preferer mémoire à calcul
 creer variable pour stocker life.getLine()-1 et life.getColumn()-1
 
 rendre le tableau le plus transparent possible pour le joueur non initié au mode de pensé "informatique"
 pas d'indice 0 dans les tableaux
+
+resoucebundle
+
+notez le score dans un fichier plus configuration "objectif" difficile plus il y a des points
 
 Idea
 
