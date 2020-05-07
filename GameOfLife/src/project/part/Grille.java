@@ -14,29 +14,43 @@ public class Grille {
 	
 	//Constructors
 	public Grille() {
+		
 		this.line = 1000;
 		this.column = 1000;
 		grille = new Cell[line][column];
- 		for (int i = 0;i<this.line; i++)
+		
+ 		for ( int i = 0;i<this.line; i++ )
 		{
-			for(int j = 0; j<this.column; j++)
+			
+ 			for ( int j = 0; j<this.column; j++ )
 			{
-				grille[i][j] = new Cell();
+				
+ 				grille[i][j] = new Cell();
+ 				
 			}
+ 			
 		}
+ 		
 	}
 	
-	public Grille(int a, int b) {
+	public Grille( int a, int b ) {
+		
 		this.line = a;
 		this.column = b;
 		grille = new Cell[line][column];
- 		for (int i = 0;i<this.line; i++)
+		
+ 		for ( int i = 0;i<this.line; i++ )
 		{
-			for(int j = 0; j<this.column; j++)
+			
+ 			for ( int j = 0; j<this.column; j++ )
 			{
-				grille[i][j] = new Cell();
+				
+ 				grille[i][j] = new Cell();
+ 				
 			}
+ 			
 		}
+ 		
 	}
 	
 	//getters & setters
@@ -60,14 +74,6 @@ public class Grille {
 		return this.grille[a][b].getGoalCell();
 	}
 	
-	public void setLine(int a) {
-		this.line = a;
-	}
-	
-	public void setColumn(int b) {
-		this.line = b;
-	}
-	
 	public void setUpdatingCell(Color c, int a, int b) {
 		this.grille[a][b].setUpdatingCell(c);
 	}
@@ -85,43 +91,66 @@ public class Grille {
 	}
 	
 	public int numberOfBlackCellGoal() {
+		
 		int counter = 0;
-		for(int i = 0; i<this.line; i++)
+		
+		for ( int i = 0; i<this.line; i++ )
 		{
-			for (int j = 0; j<this.column; j++)
+			
+			for ( int j = 0; j<this.column; j++ )
 			{
-				if(grille[i][j].getGoalCell().equals(Color.black))
+				
+				if ( grille[i][j].getGoalCell().equals(Color.black) )
 				{
+					
 					counter++;
+					
 				}
+				
 			}
+			
 		}
+		
 		return counter;
-	}
-	
-	public void printGrille(String language) {
-		if (language.equals("en"))
-		{
-			for(int i = 0; i<this.line; i++)
-			{
-				for (int j = 0; j<this.column; j++)
-				{
-					System.out.println("the cell["+(i+1)+"]["+(j+1)+"] is "+this.grille[i][j].printCell(language));
-				}
-			}
-		}
-		else
-		{
-			for(int i = 0; i<this.line; i++)
-			{
-				for (int j = 0; j<this.column; j++)
-				{
-					System.out.println("la cellule["+(i+1)+"]["+(j+1)+"] est "+this.grille[i][j].printCell(language));
-				}
-			}
-		}
 		
 	}
 	
+	public void printGrille(String language) {
+		
+		if (language.equals("en"))
+		{
+			
+			for ( int i = 0; i<this.line; i++ )
+			{
+				
+				for ( int j = 0; j<this.column; j++ )
+				{
+					
+					System.out.println("the cell["+(i+1)+"]["+(j+1)+"] is "+this.grille[i][j].printCell(language));
+					
+				}
+				
+			}
+			
+		}
+		
+		else
+		{
+			
+			for ( int i = 0; i<this.line; i++ )
+			{
+				
+				for (int j = 0; j<this.column; j++)
+				{
+					
+					System.out.println("la cellule["+(i+1)+"]["+(j+1)+"] est "+this.grille[i][j].printCell(language));
+					
+				}
+				
+			}
+			
+		}
+		
+	}
 	
 }

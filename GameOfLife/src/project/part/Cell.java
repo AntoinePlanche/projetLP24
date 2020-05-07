@@ -37,76 +37,112 @@ public class Cell {
 	}
 	
 	public void setGoalCell(Color c) {
-		if(c.equals(Color.white))
+		if ( c.equals(Color.white) )
 		{
+			
 			this.goal = Color.white;
+			
 		}
+		
 		else
 		{
+			
 			this.goal = Color.black;
+			
 		}
+		
 	}
 	
 	public void setCurrentCell(Color c) {
-		if(c.equals(Color.white))
+		if ( c.equals(Color.white) )
 		{
+			
 			this.current = Color.white;
+			
 		}
+		
 		else
 		{
+			
 			this.current = Color.black;
+			
 		}
+		
 	}
 	
 	public void setUpdatingCell(Color c) {
-		if(c.equals(Color.white))
+		if ( c.equals(Color.white) )
 		{
+			
 			this.updating = Color.white;
+			
 		}
+		
 		else
 		{
+			
 			this.updating = Color.black;
+			
 		}
+		
 	}
 	
 	
 	public int getCurrentValue() {
-		if(this.current.equals(Color.white)) //we assign a value to each color to facilitate the algorithm
+		if ( this.current.equals(Color.white) ) //we assign a value to each color to facilitate the algorithm
 		{
 			return 0;
+			
 		}
+		
 		else
 		{
+			
 			return 1;
+			
 		}
+		
 	}
 	
 	public String printCell(String language) {
-		if (language.equals("en"))
+		if ( language.equals("en") )
 		{
-			if (this.getCurrentCell().equals(Color.black))
+			
+			if ( this.getCurrentCell().equals(Color.black) )
 			{
+				
 				return "black";
+				
 			}
-			else 
+			
+			else
 			{
+				
 				return "white";
+				
 			}
+			
 		}
+		
 		else
 		{
-			if (this.getCurrentCell().equals(Color.black))
+			
+			if ( this.getCurrentCell().equals(Color.black) )
 			{
+				
 				return "noire";
+				
 			}
+			
 			else 
 			{
+				
 				return "blanche";
+				
 			}
+			
 		}
+		
 	}
-	
-	
-	
 	
 }
