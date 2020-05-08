@@ -99,7 +99,7 @@ public class Grille {
 		return this.grid[a][b].getCurrentValue();
 	}
 	
-	public int numberOfCurrentBlackCell() { //function to calculate the number of black cell ( important information for the victory conditions). 
+	public int numberOfCurrentBlackCell() { //function to calculate the number of black cell ( important information for the score). 
 		
 		int counter = 0;
 		
