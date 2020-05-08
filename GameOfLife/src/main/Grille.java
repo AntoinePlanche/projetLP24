@@ -1,3 +1,12 @@
+// Antoine Planche LP24 Project ConwayGameOfLife
+
+/* Note : this class is not really useful, we could have manipulated the cells 
+ * directly from a double array declared in the Game class but I personally find
+ * that this layer of abstraction makes the Grid clearer. This class also allows 
+ * to implement small methods that are more consistent with being in the Grid object 
+ * than in the Games object ( for instance printGrille ( line 127 ) 
+ * or numberOfCurrentBlackCell() ( line 102 ) */
+
 package main;
 
 import java.awt.Color;
@@ -90,7 +99,7 @@ public class Grille {
 		return this.grid[a][b].getCurrentValue();
 	}
 	
-	public int numberOfBlackCellGoal() { //function to calculate the number of black cell ( important information for the victory conditions). 
+	public int numberOfCurrentBlackCell() { //function to calculate the number of black cell ( important information for the victory conditions). 
 		
 		int counter = 0;
 		
@@ -100,7 +109,7 @@ public class Grille {
 			for ( int j = 0; j<this.column; j++ )
 			{
 				
-				if ( grid[i][j].getGoalCell().equals(Color.black) )
+				if ( grid[i][j].getCurrentCell().equals(Color.black) )
 				{
 					
 					counter++;

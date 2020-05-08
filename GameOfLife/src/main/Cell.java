@@ -1,4 +1,4 @@
-// Antoine Planche LP24 Projet ConwayGameOfLife
+// Antoine Planche LP24 Project ConwayGameOfLife
 
 package main;
 

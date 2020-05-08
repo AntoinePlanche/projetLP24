@@ -1,4 +1,4 @@
-// Antoine Planche LP24 Projet ConwayGameOfLife
+// Antoine Planche LP24 Project ConwayGameOfLife
 
 package main;
 
@@ -51,7 +51,7 @@ public class Games {
 			
 		}
 		
-		if (miniGames == 1)
+		if ( miniGames == 1)
 		{
 			
 			System.out.println(RESOURCEBUNDLE.getString("keyeleven"));
@@ -84,7 +84,7 @@ public class Games {
 		
 		life = new Grille(line ,column); // Create the grid
 		
-		if (miniGames == 1)
+		if ( miniGames == 1)
 		{
 			
 			do {
@@ -170,9 +170,22 @@ public class Games {
 		
 		}
 		
-		System.out.println(RESOURCEBUNDLE.getString("keyone"));
+		if ( miniGames == 1)
+		{
+			
+			System.out.println(RESOURCEBUNDLE.getString("keyone"));
+			
+		}
 		
-		// Now it's the part where the player choose it's start configuration
+		else 
+		{
+			
+			System.out.println(RESOURCEBUNDLE.getString("keythirtysix"));
+			
+		}
+		
+		
+		// Now it's the part where the player/user choose it's start configuration
 		// It's much the same as the algorithm above
 		
 		do {
@@ -264,12 +277,12 @@ public class Games {
 	
 	
 	
-	public void lapAfterLap() throws java.io.IOException
+	public void lapAfterLap() throws java.io.IOException, Exception
 	{
 		
 		int lap = 1;
 		int NbrNeighbour = 0;
-		char next = 1; // next initialize to one to enter the large while loop even in simulation mode
+		char next = 0; // char to avoid taking up too much memory
 		
 		
 		if (miniGames == 1)
@@ -277,6 +290,7 @@ public class Games {
 			
 			life.printGrille(language);
 			System.out.println(RESOURCEBUNDLE.getString("keytwenty") + lap + ".");
+			System.out.println(RESOURCEBUNDLE.getString("keythirtyseven") + life.numberOfCurrentBlackCell() + " " + RESOURCEBUNDLE.getString("keythirtyeight"));
 			System.out.println(RESOURCEBUNDLE.getString("keytwentyone"));
 			next = (char)sc.nextInt();
 				
@@ -696,7 +710,7 @@ public class Games {
 				{
 						
 					System.out.println(RESOURCEBUNDLE.getString("keytwentythree"));
-					writer = new FileWriter("resources\\project\\part\\score.txt",true);
+					writer = new FileWriter("resources\\information\\score.txt",true);
 					writer.write(RESOURCEBUNDLE.getString("keytwentyseven"));
 					writer.close();
 					System.exit(0);
@@ -728,9 +742,9 @@ public class Games {
 					if ( counter == (life.getLine()*life.getColumn()) ) // if the condition is true then it's the victory !!
 					{													// no verification in the first lap, so we canot win in the first lap
 							
-						System.out.println(RESOURCEBUNDLE.getString("keytwentyfour") + lap + RESOURCEBUNDLE.getString("keytwentyfive"));
-						writer = new FileWriter("resources\\project\\part\\score.txt",true);
-						writer.write(RESOURCEBUNDLE.getString("keytwentyeight") + life.numberOfBlackCellGoal()*50 + ".\n"); // We mark the score in the file
+						System.out.println(RESOURCEBUNDLE.getString("keytwentyfour") + " " + lap + RESOURCEBUNDLE.getString("keytwentyfive"));
+						writer = new FileWriter("resources\\information\\score.txt",true);
+						writer.write(RESOURCEBUNDLE.getString("keytwentysix") + " " + life.numberOfCurrentBlackCell()*50 + " points.\n"); // We mark the score in the file
 						writer.close();
 						System.exit(0);
 							
@@ -739,6 +753,7 @@ public class Games {
 				}
 					
 				System.out.println(RESOURCEBUNDLE.getString("keytwenty") + lap + ".");
+				System.out.println(RESOURCEBUNDLE.getString("keythirtyseven") + life.numberOfCurrentBlackCell() + " " + RESOURCEBUNDLE.getString("keythirtyeight"));
 				System.out.println(RESOURCEBUNDLE.getString("keytwentyone")); // We ask the user if he wants to go to the next lap
 				next = (char)sc.nextInt();
 					
@@ -752,16 +767,12 @@ public class Games {
 				
 			}
 			
-			sc.close();
-			System.out.println(RESOURCEBUNDLE.getString("keytwentyeight"));
-			
 		}
 		
-		else //so miniGames = 2, the code below it's the same than above but it's just a simulation, the player can't interfene
+		else //so miniGames = 2, the code below it's the same than above but it's just a simulation, the player can't interfere
 		{
 			
-			life.printGrille(language);
-			System.out.println(RESOURCEBUNDLE.getString("keytwenty") + lap + ".");
+			System.out.println(RESOURCEBUNDLE.getString("keythirtyfive"));
 			
 			try {
 				
@@ -773,350 +784,401 @@ public class Games {
 				
 			}
 			
-			while ( next == 1 )  
-			{
+			// Start the thread
 			
-				// At the beginning, I treat the center cells 
-				// ( those that are not on the edges or on the corners
-				
-				for ( int i = 1; i<(life.getLine()-1); i++ )
-				{
-					
-					for ( int j = 1; (j<life.getColumn()-1); j++ )
-					{
-						
-						// I sweep the center of the grid
-						
-						/*I check if the cell is black or white then I calculate the number of 
-						 black neighbors with the function getCurrentValue (see class cell line 92 for more details)
-						 and I apply the appropriate treatment (the cell becomes black or white).
-						 Note that we could first calculate the number of black neighbors and 
-						 then test if the cell is white or black.
-						 It comes down to the same level of complexity  */
-						
-						if ( life.getCurrentCell(i,j).equals(Color.black) ) 
-						{
-							
-							NbrNeighbour = life.getValue((i-1),(j-1)) + life.getValue((i-1),(j)) + life.getValue((i-1),(j+1)) +
-									life.getValue((i),(j-1)) + life.getValue((i),(j+1)) + life.getValue((i+1),(j-1) )+
-									life.getValue((i+1),(j)) + life.getValue((i+1),(j+1));
-							
-							if( NbrNeighbour != 2 && NbrNeighbour != 3 ) // if a black cell isn't surrounded by 2 or 3 black cell, it becomes white.
-							{												
-								
-								life.setUpdatingCell(Color.white, i, j);
-							
-							}
-						
-						}
-						
-						else // then the cell is white
-						{
-							
-							NbrNeighbour = life.getValue((i-1),(j-1)) + life.getValue((i-1),(j)) + life.getValue((i-1),(j+1)) +
-									life.getValue((i),(j-1)) + life.getValue((i),(j+1)) + life.getValue((i+1),(j-1) )+
-									life.getValue((i+1),(j)) + life.getValue((i+1),(j+1));
-							
-							if( NbrNeighbour == 3 ) // If a white cell is surrounded by 3 black cell, it becomes black
-							{
-								
-								life.setUpdatingCell(Color.black, i, j);
-								
-							}
-							
-						}
-						
-					}
-					
-				}
-				
-				// We move to the grid edge cell, We apply much the same treatment to these cells
-				// Only changes the fact that they only have 5 neighboring cells
-				// We sweep the grid in four times, first the right column then the left column
-				// then the top column and finally the bottom column
-				
-				for ( int i = 1; i<life.getLine()-1 ; i++ )
-				{
-					
-					if (life.getCurrentCell(i,0).equals(Color.black))
-					{
-						
-						NbrNeighbour = life.getValue((i-1),(0)) + life.getValue((i-1),(1)) + life.getValue((i),(1)) +
-								life.getValue((i+1),(0)) + life.getValue((i+1),(1));
-						
-						if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
-						{
-							
-							life.setUpdatingCell(Color.white, i, 0);
-							
-						}
-						
-					}
-					
-					else
-					{
-						
-						NbrNeighbour = life.getValue((i-1),(0)) + life.getValue((i-1),(1)) + life.getValue((i),(1)) +
-								life.getValue((i+1),(0)) + life.getValue((i+1),(1));
-						
-						if ( NbrNeighbour == 3 )
-						{
-							
-							life.setUpdatingCell(Color.black, i, 0);
-							
-						}
-					}
-					
-					if ( life.getCurrentCell(i,(life.getColumn()-1)).equals(Color.black) )
-						
-					{
-						
-						NbrNeighbour = life.getValue((i-1),(life.getColumn()-1)) + life.getValue((i-1),(life.getColumn()-2))
-						+ life.getValue((i),(life.getColumn()-2)) + life.getValue((i+1),(life.getColumn()-2))
-						+ life.getValue((i+1),(life.getColumn()-1));
-						
-						if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
-						{
-							
-							life.setUpdatingCell(Color.white, i, life.getColumn()-1);
-							
-						}
-						
-					}
-					else
-					{
-						
-						NbrNeighbour = life.getValue((i-1),(life.getColumn()-1)) + life.getValue((i-1),(life.getColumn()-2))
-						+ life.getValue((i),(life.getColumn()-2)) + life.getValue((i+1),(life.getColumn()-2))
-						+ life.getValue((i+1),(life.getColumn()-1));
-		
-						if ( NbrNeighbour == 3 )
-						{
-							
-							life.setUpdatingCell(Color.black, i, life.getColumn()-1);
-							
-						}
-						
-					}
-					
-				}
-				
-				for ( int j = 1; j<life.getColumn()-1; j++ )
-				{
-					
-					if ( life.getCurrentCell(0,j).equals(Color.black) )	
-					{
-						NbrNeighbour = life.getValue((0),(j-1)) + life.getValue((1),(j-1)) + life.getValue((1),(j)) +
-								life.getValue((1),(j+1)) + life.getValue((0),(j+1));
-						
-						if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
-						{
-							
-							life.setUpdatingCell(Color.white, j, 0);
-							
-						}
-						
-					}
-					
-					else
-					{
-						
-						NbrNeighbour = life.getValue((0),(j-1)) + life.getValue((1),(j-1)) + life.getValue((1),(j)) +
-								life.getValue((1),(j+1)) + life.getValue((0),(j+1));
-						
-						if ( NbrNeighbour == 3 )
-						{
-							
-							life.setUpdatingCell(Color.black, j, 0);
-							
-						}
-						
-					}
-					
-					if ( life.getCurrentCell(life.getLine()-1,(j)).equals(Color.black) )
-					{
-						
-						NbrNeighbour = life.getValue((life.getLine()-1),(j-1)) + life.getValue((life.getLine()-2),(j-1))
-						+ life.getValue((life.getLine()-2),(j)) + life.getValue((life.getLine()-2),(j+1))
-						+ life.getValue((life.getLine()-1),(j+1));
-						
-						if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
-						{
-							
-							life.setUpdatingCell(Color.white, j, 0);
-							
-						}
-						
-					}
-					
-					else
-					{
-						
-						NbrNeighbour = life.getValue((life.getLine()-1),(j-1)) + life.getValue((life.getLine()-2),(j-1))
-						+ life.getValue((life.getLine()-2),(j)) + life.getValue((life.getLine()-2),(j+1))
-						+ life.getValue((life.getLine()-1),(j+1));
-		
-						if ( NbrNeighbour == 3 )
-						{
-							
-							life.setUpdatingCell(Color.black, j, 0);
-							
-						}
-						
-					}
-					
-				}
-				
-				if ( life.getCurrentCell(0,0).equals(Color.black) )
-				{
-					
-					NbrNeighbour = life.getValue(1,0) + life.getValue(1,1) + life.getValue(0,1);
-					
-					if ( NbrNeighbour != 2 && NbrNeighbour != 3 )	
-					{
-						
-						life.setUpdatingCell(Color.white, 0, 0);
-						
-					}
-					
-				}
-				
-				else
-				{
-					
-					NbrNeighbour = life.getValue(1,0) + life.getValue(1,1) + life.getValue(0,1);
-					
-					if ( NbrNeighbour == 3 )
-					{
-						
-						life.setUpdatingCell(Color.black, 0, 0);
-						
-					}
-					
-				}
-				
-				if ( life.getCurrentCell(0,life.getColumn()-1).equals(Color.black) )
-				{
-					
-					NbrNeighbour = life.getValue(0,life.getColumn()-2) + life.getValue(1,life.getColumn()-2)
-					+ life.getValue(1,life.getColumn()-1);
-					
-					if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
-					{
-						
-						life.setUpdatingCell(Color.white, 0, life.getColumn()-1);
-						
-					}
-					
-				}
-				
-				else
-				{
-					
-					NbrNeighbour = life.getValue(0,life.getColumn()-2) + life.getValue(1,life.getColumn()-2)
-					+ life.getValue(1,life.getColumn()-1);
-					
-					if ( NbrNeighbour == 3 )
-					{
-						
-						life.setUpdatingCell(Color.black, 0, life.getColumn()-1);
-						
-					}
-					
-				}
-				if ( life.getCurrentCell(life.getLine()-1,0).equals(Color.black) )
-				{
-					
-					NbrNeighbour = life.getValue(life.getLine()-2,0) + life.getValue(life.getLine()-2,0)
-					+ life.getValue(life.getLine()-1,1);
-					
-					if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
-					{
-						
-						life.setUpdatingCell(Color.white, life.getLine()-1, 0);
-						
-					}
-					
-				}
-				
-				else
-				{
-					
-					NbrNeighbour = life.getValue(life.getLine()-2,0) + life.getValue(life.getLine()-2,0)
-					+ life.getValue(life.getLine()-1,1);
-					
-					if ( NbrNeighbour == 3 )
-					{
-						
-						life.setUpdatingCell(Color.black, life.getLine()-1, 0);
-						
-					}
-					
-				}
-				
-				if ( life.getCurrentCell(life.getLine()-1,life.getColumn()-1).equals(Color.black) )
-				{
-					
-					NbrNeighbour = life.getValue(life.getLine()-2,life.getColumn()-1) + life.getValue(life.getLine()-2,life.getColumn()-2)
-					+ life.getValue(life.getLine()-1,life.getColumn()-2);
-					
-					if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
-					
-					{
-						
-						life.setUpdatingCell(Color.white, life.getLine()-1, life.getColumn()-1);
-					
-					}
-					
-				}
-				
-				else
-				{
-					
-					NbrNeighbour = life.getValue(life.getLine()-2,life.getColumn()-1) + life.getValue(life.getLine()-2,life.getColumn()-2)
-					+ life.getValue(life.getLine()-1,life.getColumn()-2);
-					
-					if ( NbrNeighbour == 3 )
-					{
-						
-						life.setUpdatingCell(Color.black, life.getLine()-1, life.getColumn()-1);
-						
-					}
-					
-				}
-				
-				for ( int i = 0; i<life.getLine();i++ )
-				{
-					
-					for ( int j = 0; j<life.getColumn();j++ )
-					{
-						
-						life.setCurrentCell(life.getUpdatingCell(i,j),i,j); // I sweep the grid to update the current cell
-						
-					}
-					
-				}
-				
-				life.printGrille(language);
-				lap++;
-				System.out.println(RESOURCEBUNDLE.getString("keytwenty") + lap + ".");
-				
-				try {
-					
-					Thread.sleep(3000); // allow the user to see the result
-					
-				} catch (InterruptedException ie) {
-					
-					//nothing
-					
-				}
-				
-			}
+			ThreadSimulation simulation = new ThreadSimulation();
+			simulation.start(); 
+	          
+			// Wait for manual interruption 
 			
-			sc.close();
-			System.out.println(RESOURCEBUNDLE.getString("keytwentyeight"));
+			System.in.read();
+	        simulation.interrupt(); 
+	        
+	        // Wait for the thread to finish
+	        
+	        simulation.join(); 
+	    
 		}
 		
+		sc.close();
+		System.out.println(RESOURCEBUNDLE.getString("keytwentyeight"));
+		
 	}
+	
+	
+	/* This below class allow us to activate a second execution thread to interrupt
+	 the simulation by a keyboard input  */
+	
+	public class ThreadSimulation extends Thread //nested class
+    {
+		
+		private int lap = 1;
+		private int NbrNeighbour = 0;
+    	
+		public void run() 
+    	{
+    		
+    		life.printGrille(language);
+    		System.out.println(RESOURCEBUNDLE.getString("keytwenty") + lap + ".");
+    		System.out.println(RESOURCEBUNDLE.getString("keythirtyseven") + life.numberOfCurrentBlackCell() + " " + RESOURCEBUNDLE.getString("keythirtyeight"));
+    		
+    		try {
+    			
+    			Thread.sleep(3000); // allow the user to see the result
+    			
+    		} catch (InterruptedException ie) {
+    			
+    			//Activation of the interrupt flag
+    			
+    			Thread.currentThread().interrupt();
+    			
+    		}
+    		
+    		while ( !isInterrupted() )  // As long as the thread is not interrupted ...
+    		{
+    		
+    			// At the beginning, I treat the center cells 
+    			// ( those that are not on the edges or on the corners )
+    			
+    			for ( int i = 1; i<(life.getLine()-1); i++ )
+    			{
+    				
+    				for ( int j = 1; (j<life.getColumn()-1); j++ )
+    				{
+    					
+    					// I sweep the center of the grid
+    					
+    					/*I check if the cell is black or white then I calculate the number of 
+    					 black neighbors with the function getCurrentValue (see class cell line 92 for more details)
+    					 and I apply the appropriate treatment (the cell becomes black or white).
+    					 Note that we could first calculate the number of black neighbors and 
+    					 then test if the cell is white or black.
+    					 It comes down to the same level of complexity  */
+    					
+    					if ( life.getCurrentCell(i,j).equals(Color.black) ) 
+    					{
+    						
+    						NbrNeighbour = life.getValue((i-1),(j-1)) + life.getValue((i-1),(j)) + life.getValue((i-1),(j+1)) +
+    								life.getValue((i),(j-1)) + life.getValue((i),(j+1)) + life.getValue((i+1),(j-1) )+
+    								life.getValue((i+1),(j)) + life.getValue((i+1),(j+1));
+    						
+    						if( NbrNeighbour != 2 && NbrNeighbour != 3 ) // if a black cell isn't surrounded by 2 or 3 black cell, it becomes white.
+    						{												
+    							
+    							life.setUpdatingCell(Color.white, i, j);
+    						
+    						}
+    					
+    					}
+    					
+    					else // then the cell is white
+    					{
+    						
+    						NbrNeighbour = life.getValue((i-1),(j-1)) + life.getValue((i-1),(j)) + life.getValue((i-1),(j+1)) +
+    								life.getValue((i),(j-1)) + life.getValue((i),(j+1)) + life.getValue((i+1),(j-1) )+
+    								life.getValue((i+1),(j)) + life.getValue((i+1),(j+1));
+    						
+    						if( NbrNeighbour == 3 ) // If a white cell is surrounded by 3 black cell, it becomes black
+    						{
+    							
+    							life.setUpdatingCell(Color.black, i, j);
+    							
+    						}
+    						
+    					}
+    					
+    				}
+    				
+    			}
+    			
+    			// We move to the grid edge cell, We apply much the same treatment to these cells
+    			// Only changes the fact that they only have 5 neighboring cells
+    			// We sweep the grid in four times, first the right column then the left column
+    			// then the top column and finally the bottom column
+    			
+    			for ( int i = 1; i<life.getLine()-1 ; i++ )
+    			{
+    				
+    				if (life.getCurrentCell(i,0).equals(Color.black))
+    				{
+    					
+    					NbrNeighbour = life.getValue((i-1),(0)) + life.getValue((i-1),(1)) + life.getValue((i),(1)) +
+    							life.getValue((i+1),(0)) + life.getValue((i+1),(1));
+    					
+    					if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
+    					{
+    						
+    						life.setUpdatingCell(Color.white, i, 0);
+    						
+    					}
+    					
+    				}
+    				
+    				else
+    				{
+    					
+    					NbrNeighbour = life.getValue((i-1),(0)) + life.getValue((i-1),(1)) + life.getValue((i),(1)) +
+    							life.getValue((i+1),(0)) + life.getValue((i+1),(1));
+    					
+    					if ( NbrNeighbour == 3 )
+    					{
+    						
+    						life.setUpdatingCell(Color.black, i, 0);
+    						
+    					}
+    				}
+    				
+    				if ( life.getCurrentCell(i,(life.getColumn()-1)).equals(Color.black) )
+    					
+    				{
+    					
+    					NbrNeighbour = life.getValue((i-1),(life.getColumn()-1)) + life.getValue((i-1),(life.getColumn()-2))
+    					+ life.getValue((i),(life.getColumn()-2)) + life.getValue((i+1),(life.getColumn()-2))
+    					+ life.getValue((i+1),(life.getColumn()-1));
+    					
+    					if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
+    					{
+    						
+    						life.setUpdatingCell(Color.white, i, life.getColumn()-1);
+    						
+    					}
+    					
+    				}
+    				else
+    				{
+    					
+    					NbrNeighbour = life.getValue((i-1),(life.getColumn()-1)) + life.getValue((i-1),(life.getColumn()-2))
+    					+ life.getValue((i),(life.getColumn()-2)) + life.getValue((i+1),(life.getColumn()-2))
+    					+ life.getValue((i+1),(life.getColumn()-1));
+    	
+    					if ( NbrNeighbour == 3 )
+    					{
+    						
+    						life.setUpdatingCell(Color.black, i, life.getColumn()-1);
+    						
+    					}
+    					
+    				}
+    				
+    			}
+    			
+    			for ( int j = 1; j<life.getColumn()-1; j++ )
+    			{
+    				
+    				if ( life.getCurrentCell(0,j).equals(Color.black) )	
+    				{
+    					NbrNeighbour = life.getValue((0),(j-1)) + life.getValue((1),(j-1)) + life.getValue((1),(j)) +
+    							life.getValue((1),(j+1)) + life.getValue((0),(j+1));
+    					
+    					if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
+    					{
+    						
+    						life.setUpdatingCell(Color.white, j, 0);
+    						
+    					}
+    					
+    				}
+    				
+    				else
+    				{
+    					
+    					NbrNeighbour = life.getValue((0),(j-1)) + life.getValue((1),(j-1)) + life.getValue((1),(j)) +
+    							life.getValue((1),(j+1)) + life.getValue((0),(j+1));
+    					
+    					if ( NbrNeighbour == 3 )
+    					{
+    						
+    						life.setUpdatingCell(Color.black, j, 0);
+    						
+    					}
+    					
+    				}
+    				
+    				if ( life.getCurrentCell(life.getLine()-1,(j)).equals(Color.black) )
+    				{
+    					
+    					NbrNeighbour = life.getValue((life.getLine()-1),(j-1)) + life.getValue((life.getLine()-2),(j-1))
+    					+ life.getValue((life.getLine()-2),(j)) + life.getValue((life.getLine()-2),(j+1))
+    					+ life.getValue((life.getLine()-1),(j+1));
+    					
+    					if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
+    					{
+    						
+    						life.setUpdatingCell(Color.white, j, 0);
+    						
+    					}
+    					
+    				}
+    				
+    				else
+    				{
+    					
+    					NbrNeighbour = life.getValue((life.getLine()-1),(j-1)) + life.getValue((life.getLine()-2),(j-1))
+    					+ life.getValue((life.getLine()-2),(j)) + life.getValue((life.getLine()-2),(j+1))
+    					+ life.getValue((life.getLine()-1),(j+1));
+    	
+    					if ( NbrNeighbour == 3 )
+    					{
+    						
+    						life.setUpdatingCell(Color.black, j, 0);
+    						
+    					}
+    					
+    				}
+    				
+    			}
+    			
+    			if ( life.getCurrentCell(0,0).equals(Color.black) )
+    			{
+    				
+    				NbrNeighbour = life.getValue(1,0) + life.getValue(1,1) + life.getValue(0,1);
+    				
+    				if ( NbrNeighbour != 2 && NbrNeighbour != 3 )	
+    				{
+    					
+    					life.setUpdatingCell(Color.white, 0, 0);
+    					
+    				}
+    				
+    			}
+    			
+    			else
+    			{
+    				
+    				NbrNeighbour = life.getValue(1,0) + life.getValue(1,1) + life.getValue(0,1);
+    				
+    				if ( NbrNeighbour == 3 )
+    				{
+    					
+    					life.setUpdatingCell(Color.black, 0, 0);
+    					
+    				}
+    				
+    			}
+    			
+    			if ( life.getCurrentCell(0,life.getColumn()-1).equals(Color.black) )
+    			{
+    				
+    				NbrNeighbour = life.getValue(0,life.getColumn()-2) + life.getValue(1,life.getColumn()-2)
+    				+ life.getValue(1,life.getColumn()-1);
+    				
+    				if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
+    				{
+    					
+    					life.setUpdatingCell(Color.white, 0, life.getColumn()-1);
+    					
+    				}
+    				
+    			}
+    			
+    			else
+    			{
+    				
+    				NbrNeighbour = life.getValue(0,life.getColumn()-2) + life.getValue(1,life.getColumn()-2)
+    				+ life.getValue(1,life.getColumn()-1);
+    				
+    				if ( NbrNeighbour == 3 )
+    				{
+    					
+    					life.setUpdatingCell(Color.black, 0, life.getColumn()-1);
+    					
+    				}
+    				
+    			}
+    			if ( life.getCurrentCell(life.getLine()-1,0).equals(Color.black) )
+    			{
+    				
+    				NbrNeighbour = life.getValue(life.getLine()-2,0) + life.getValue(life.getLine()-2,0)
+    				+ life.getValue(life.getLine()-1,1);
+    				
+    				if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
+    				{
+    					
+    					life.setUpdatingCell(Color.white, life.getLine()-1, 0);
+    					
+    				}
+    				
+    			}
+    			
+    			else
+    			{
+    				
+    				NbrNeighbour = life.getValue(life.getLine()-2,0) + life.getValue(life.getLine()-2,0)
+    				+ life.getValue(life.getLine()-1,1);
+    				
+    				if ( NbrNeighbour == 3 )
+    				{
+    					
+    					life.setUpdatingCell(Color.black, life.getLine()-1, 0);
+    					
+    				}
+    				
+    			}
+    			
+    			if ( life.getCurrentCell(life.getLine()-1,life.getColumn()-1).equals(Color.black) )
+    			{
+    				
+    				NbrNeighbour = life.getValue(life.getLine()-2,life.getColumn()-1) + life.getValue(life.getLine()-2,life.getColumn()-2)
+    				+ life.getValue(life.getLine()-1,life.getColumn()-2);
+    				
+    				if ( NbrNeighbour != 2 && NbrNeighbour != 3 )
+    				
+    				{
+    					
+    					life.setUpdatingCell(Color.white, life.getLine()-1, life.getColumn()-1);
+    				
+    				}
+    				
+    			}
+    			
+    			else
+    			{
+    				
+    				NbrNeighbour = life.getValue(life.getLine()-2,life.getColumn()-1) + life.getValue(life.getLine()-2,life.getColumn()-2)
+    				+ life.getValue(life.getLine()-1,life.getColumn()-2);
+    				
+    				if ( NbrNeighbour == 3 )
+    				{
+    					
+    					life.setUpdatingCell(Color.black, life.getLine()-1, life.getColumn()-1);
+    					
+    				}
+    				
+    			}
+    			
+    			for ( int i = 0; i<life.getLine();i++ )
+    			{
+    				
+    				for ( int j = 0; j<life.getColumn();j++ )
+    				{
+    					
+    					life.setCurrentCell(life.getUpdatingCell(i,j),i,j); // I sweep the grid to update the current cell
+    					
+    				}
+    				
+    			}
+    			
+    			life.printGrille(language);
+    			lap++;
+    			System.out.println(RESOURCEBUNDLE.getString("keytwenty") + lap + ".");
+    			System.out.println(RESOURCEBUNDLE.getString("keythirtyseven") + life.numberOfCurrentBlackCell() + " " + RESOURCEBUNDLE.getString("keythirtyeight"));
+    			
+    			try {
+    				
+    				Thread.sleep(3000); // allow the user to see the result
+    				
+    			} catch (InterruptedException ie) {
+    				
+    				//Activation of the interrupt flag
+        			
+        			Thread.currentThread().interrupt();
+    				
+    			}
+    			
+    		}
+    		
+    	}
+    	
+    }
 	
 }
