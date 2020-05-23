@@ -29,7 +29,7 @@ public class NonGraphicMiniGame {
 		int line = 0;
 		int column = 0;
 		this.language = new String(language); // useful to print the grid in the correct language (cf class Grille line 190)
-	    this.RESOURCEBUNDLE = RESOURCEBUNDLE;
+	    	this.RESOURCEBUNDLE = RESOURCEBUNDLE;
 		System.out.println(RESOURCEBUNDLE.getString("keyeleven"));
 		System.out.println(RESOURCEBUNDLE.getString("keytwo"));
 		line = sc.nextInt();
