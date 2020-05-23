@@ -25,7 +25,7 @@ public class NonGraphicSimulation {
 		int line = 0;
 		int column = 0;
 		this.language = new String(language); // useful to print the grid in the correct language (cf class SimulationGrid line 165)
-	    this.RESOURCEBUNDLE = RESOURCEBUNDLE;
+	    	this.RESOURCEBUNDLE = RESOURCEBUNDLE;
 		
 		System.out.println(RESOURCEBUNDLE.getString("keytwo"));
 		line = sc.nextInt();
