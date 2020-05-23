@@ -165,7 +165,8 @@ public class SimulationGrid {
 	
 	
 	
-	public void printGrille(String language) {
+	public void printGrille(String language) 
+	{
 		
 		if (language.equals("en"))
 		{
