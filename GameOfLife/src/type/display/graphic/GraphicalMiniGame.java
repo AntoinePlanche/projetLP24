@@ -24,20 +24,20 @@ import world.grid.MiniGameGrid;
 public class GraphicalMiniGame extends JFrame implements ActionListener {
    
 	
-	private static final long serialVersionUID = 1L;
-	private ResourceBundle RESOURCEBUNDLE;
-	private int lap = 0; // counter of laps
-	private static FileWriter writer; // allow to write the score in the score file
-	private int goalLap; // stock the max lap to reach the "target" configuration
-	private byte difficulty; // byte to avoid taking up too much memory
-	private JLabel numberOfLap; // print the current lap
-	private JLabel numberOfBlackCell; // print the current number of back cell
-	private JButton[][] cell; //matrix of cell to contain the grid
-	private JButton stopMiniGame; // allow to stop the mini game
-	private JButton startMiniGame; // allow to start the mini game
-	private JButton startPlayerConfiguration; // allow to go to the choice of the starting simulation of the player
-	private JButton nextLap; // allow to go to the next lap
-	private JButton changeOneCell; // allow to change one cell each lap during the mini game if the difficulty is easy
+    private static final long serialVersionUID = 1L;
+    private ResourceBundle RESOURCEBUNDLE;
+    private int lap = 0; // counter of laps
+    private static FileWriter writer; // allow to write the score in the score file
+    private int goalLap; // stock the max lap to reach the "target" configuration
+    private byte difficulty; // byte to avoid taking up too much memory
+    private JLabel numberOfLap; // print the current lap
+    private JLabel numberOfBlackCell; // print the current number of back cell
+    private JButton[][] cell; //matrix of cell to contain the grid
+    private JButton stopMiniGame; // allow to stop the mini game
+    private JButton startMiniGame; // allow to start the mini game
+    private JButton startPlayerConfiguration; // allow to go to the choice of the starting simulation of the player
+    private JButton nextLap; // allow to go to the next lap
+    private JButton changeOneCell; // allow to change one cell each lap during the mini game if the difficulty is easy
     private JPanel grid = new JPanel(); // for the grid
     private JPanel mainInformationPanel = new JPanel(); //to contain configurationPane and simulationPane with OverLay layout
     private JPanel configurationMasterGamePane = new JPanel(); // for the choice of the "target" configuration
@@ -123,30 +123,30 @@ public class GraphicalMiniGame extends JFrame implements ActionListener {
 		
         // add and configure the buttons of the configurationMasterGamePane
         
-		startPlayerConfiguration = new JButton(RESOURCEBUNDLE.getString("keygraphicminigamefour"));
-		startPlayerConfiguration.addActionListener(this);
-		configurationMasterGamePane.setLayout(new FlowLayout());
-		configurationMasterGamePane.add(startPlayerConfiguration);
-		configurationMasterGamePane.setVisible(true);
-		
-		// add and configure the buttons of the configurationPlayerPane
-		
-		startMiniGame = new JButton(RESOURCEBUNDLE.getString("keygraphictwo"));
-		startMiniGame.addActionListener(this);
-		configurationPlayerPane.setLayout(new FlowLayout());
-		configurationPlayerPane.add(startMiniGame);
-		configurationPlayerPane.setVisible(false);
+	startPlayerConfiguration = new JButton(RESOURCEBUNDLE.getString("keygraphicminigamefour"));
+	startPlayerConfiguration.addActionListener(this);
+	configurationMasterGamePane.setLayout(new FlowLayout());
+	configurationMasterGamePane.add(startPlayerConfiguration);
+	configurationMasterGamePane.setVisible(true);
+
+	// add and configure the buttons of the configurationPlayerPane
+
+	startMiniGame = new JButton(RESOURCEBUNDLE.getString("keygraphictwo"));
+	startMiniGame.addActionListener(this);
+	configurationPlayerPane.setLayout(new FlowLayout());
+	configurationPlayerPane.add(startMiniGame);
+	configurationPlayerPane.setVisible(false);
         
         // I configure the grid panel to host the matrix of button
 		
-		grid.setLayout(new GridLayout(line,column));
+	grid.setLayout(new GridLayout(line,column));
         grid.setVisible(true);
         
         // I configure the property of the frame
         
         this.setLocationRelativeTo(null);
-	    this.setResizable(true);
-	    this.setAlwaysOnTop(false);
+        this.setResizable(true);
+	this.setAlwaysOnTop(false);
         this.setVisible(true);
         
         // allow to explain to the master game how the grid works
@@ -163,10 +163,10 @@ public class GraphicalMiniGame extends JFrame implements ActionListener {
 	
     
     public void actionPerformed(ActionEvent e)
-	{
+    {
 		
 		if ( e.getSource() == startPlayerConfiguration )
-        {
+        	{
 			
 			// the master game chooses the number of maximum lap to reach his configuration
 			
@@ -188,10 +188,10 @@ public class GraphicalMiniGame extends JFrame implements ActionListener {
 			configurationPlayerPane.setVisible(true); // I switch between these two JPanels
 			this.displayCurrentColor(life);
 			this.grid.repaint();
-    		this.mainInformationPanel.repaint();
-    		this.repaint();
+			this.mainInformationPanel.repaint();
+			this.repaint();
     		
-        }
+        	}
 		
 		else if( e.getSource() == stopMiniGame )
 		{  
@@ -223,16 +223,16 @@ public class GraphicalMiniGame extends JFrame implements ActionListener {
 			}
 			
 			for ( int i=0; i<this.life.getLine(); i++ )
-            {
+           		{
             	
-    			for ( int j=0; j<this.life.getColumn(); j++ )
-            	{
+    				for ( int j=0; j<this.life.getColumn(); j++ )
+            			{
             		
-    				cell[i][j].setEnabled(false); // I disable all the cells buttons
+    					cell[i][j].setEnabled(false); // I disable all the cells buttons
     				
-            	}
+            			}
                     
-            }
+            		}
 			
 			// I display the information number of black cell and the current lap
 			
@@ -241,8 +241,8 @@ public class GraphicalMiniGame extends JFrame implements ActionListener {
 			
 			configurationPlayerPane.setVisible(false); 
 			miniGamePane.setVisible(true); // I switch between the two JPanel
-    		this.mainInformationPanel.repaint();
-    		this.repaint();
+			this.mainInformationPanel.repaint();
+			this.repaint();
     		
 		}
 		
@@ -275,7 +275,7 @@ public class GraphicalMiniGame extends JFrame implements ActionListener {
 			
 			this.grid.repaint();
 			this.miniGamePane.repaint();
-	        repaint();
+	        	repaint();
 			
 		}
 		
@@ -283,59 +283,60 @@ public class GraphicalMiniGame extends JFrame implements ActionListener {
 		{
 			
 			for (int i=0; i<this.life.getLine(); i++)
-            {
+            		{	
             	
-    			for (int j=0; j<this.life.getColumn(); j++)
-            	{
+    				for (int j=0; j<this.life.getColumn(); j++)
+            			{
             		
     				cell[i][j].setEnabled(true); // I disable all the cells buttons to avoid the player can change many cells during one lap
     				
-            	}
+            			}
                     
-            }
+            		}
 			
 			changeOneCell.setEnabled(false);
 			changeOneCell.setVisible(false);
 			
-			
 		}
 		
-        else // so it's the grid button
-        {
-        	
-        	if( configurationPlayerPane.isVisible() ) // If the configurationPlayerPane is  visible, I update the current color and the updating color (cf class MiniGameCell)
+        	else // so it's the grid button
         	{
-            	for ( int i=0; i<this.life.getLine(); i++ )
-                {
-                	
-            		for ( int j=0; j<this.life.getColumn(); j++ )
-                	{
-                		
-            			if ( e.getSource() == cell[i][j] )
-                		{
-                			
-            				if( this.life.getCurrentCell(i,j).equals(Color.white) )
-                        	{
-                				
-            					this.life.setCurrentCell(Color.black, i, j);
-                				this.life.setUpdatingCell(Color.black, i, j);
-                				
-                        	}
-                        	
-            				else
-                        	{
-                        		
-                        		this.life.setCurrentCell(Color.white, i, j);
-                        		this.life.setUpdatingCell(Color.white, i, j);
-                        		
-                        	}
-                        	
-            				this.displayCurrentColor(this.life);
-                		
-                		}
-                	}
-                        
-                }
+        	
+			if( configurationPlayerPane.isVisible() ) // If the configurationPlayerPane is  visible, I update the current color and the updating color (cf class MiniGameCell)
+			{
+				for ( int i=0; i<this.life.getLine(); i++ )
+				{
+
+					for ( int j=0; j<this.life.getColumn(); j++ )
+					{
+
+						if ( e.getSource() == cell[i][j] )
+						{
+
+							if( this.life.getCurrentCell(i,j).equals(Color.white) )
+								
+						{
+
+							this.life.setCurrentCell(Color.black, i, j);
+							this.life.setUpdatingCell(Color.black, i, j);
+
+						}
+
+						else
+						{
+
+							this.life.setCurrentCell(Color.white, i, j);
+							this.life.setUpdatingCell(Color.white, i, j);
+
+						}
+
+						this.displayCurrentColor(this.life);
+
+					}
+						
+				}
+
+			}
             	
         	}
         	
